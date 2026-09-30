@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EscrowCreator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+<header>
+    <div class="logo">
+         Escrow<span>Creator</span>
+    </div>
+
+    <div class="nav-right">
+        <span class="test-mode">● PAYMENT PROVIDER TEST MODE</span>
+        <button onclick="showPage('create')">+ New Contract</button>
+    </div>
+</header>
+<div class="role-switcher">
+    <button onclick="switchRole('brand')" class="role-btn active" id="brandRoleBtn">
+        🏢 Brand
+    </button>
+
+    <button onclick="switchRole('influencer')" class="role-btn" id="influencerRoleBtn">
+        👤 Influencer
+    </button>
+</div>
+
+
+<!-- SIDEBAR -->
+<div class="layout">
+
+    <aside>
+        <h4>WORKSPACE</h4>
+
+        <div class="nav-item active" onclick="showPage('dashboard')">
+            📊 Overview
+        </div>
+
+        <div class="nav-item" onclick="showPage('create')">
+            📝 Create Contract
+        </div>
+
+        <div class="nav-item" onclick="showPage('contracts')">
+            📋 Contracts
+        </div>
+
+        <div class="nav-item" onclick="showPage('payouts')">
+            💰 Payout Ledger
+        </div>
+
+        <div class="security-box">
+            🔐 <b>Funds never sit on EscrowCreator</b>
+            <p>
+                The payment provider handles funds.
+                EscrowCreator manages contracts,
+                verification and payout logic.
+            </p>
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page">
+
+            <h2 id="dashboardTitle">Brand Dashboard</h2><h2 id="dashboardTitle" style="margin: 20px 0; font-size: 28px;">
+                Brand Dashboard
+            </h2>
+
+            <div class="hero">
+
+                <div>
+                    <small>✨ AUTOMATED CREATOR PAYMENTS</small>
+
+                    <h1>
+                        Contracts that turn
+                        <span>proof</span> into payment.
+                    </h1>
+
+                    <p>
+                        Create sponsorship contracts, protect the agreed
+                        amount through a payment provider, verify deliverables,
+                        and release only the earned percentage automatically.
+                    </p>
+
+                    <button class="main-button" onclick="showPage('create')">
+                        Create Sponsorship Contract →
+                    </button>
+                </div>
+
+                <div class="flow">
+
+                    <div class="flow-item">
+                        <b>01</b>
+                        Contract Created
+                        <small>Terms are locked</small>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <b>02</b>
+                        Funds Deposited
+                        <small>Payment provider</small>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <b>03</b>
+                        Deliverable Verified
+                        <small>Requirements checked</small>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <b>04</b>
+                        Automatic Payout
+                        <small>Earned percentage released</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+            <div class="stats">
+
+                <div class="stat-card">
+                    <span>Active Contracts</span>
+                    <h2 id="contractCount">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <span>Contracted Value</span>
+                    <h2 id="totalValue">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <span>Released to Creators</span>
+                    <h2 id="releasedValue">₹0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <span>Verification Events</span>
+                    <h2 id="verificationCount">0</h2>
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE CONTRACT -->
+            <div class="section-title">
+                <div>
+                    <h2>Milestone Control Center</h2>
+                    <p>Verify requirements and release the corresponding payment.</p>
+                </div>
+            </div>
+
+            <div id="activeContract"></div>
+
+        </section>
+
+
+        <!-- CREATE CONTRACT -->
+        <section id="create" class="page hidden">
+
+            <div class="page-heading">
+                <small>ESCROWCREATOR WORKSPACE</small>
+                <h1>Create Sponsorship Contract</h1>
+                <p>
+                    Define what the influencer must complete before each
+                    percentage is released.
+                </p>
+            </div>
+
+            <div class="form-card">
+
+                <h2>📝 Contract Details</h2>
+
+                <div class="form-grid">
+
+                    <div>
+                        <label>Brand Name</label>
+                        <input id="brand" placeholder="e.g. NovaWear">
+                    </div>
+
+                    <div>
+                        <label>Influencer Name</label>
+                        <input id="influencer" placeholder="e.g. Aarav Sharma">
+                    </div>
+
+                    <div class="full">
+                        <label>Campaign Name</label>
+                        <input id="campaign" placeholder="e.g. Winter Collection Campaign">
+                    </div>
+
+                    <div>
+                        <label>Contract Amount (₹)</label>
+                        <input id="amount" type="number" placeholder="30000">
+                    </div>
+                    <div>
+                        <label>Platform Fee</label>
+                        <div class="fee-display">2% of contract value</div>
+                    </div>
+
+                    <div>
+                        <label>Platform</label>
+                        <select id="platform">
+                            <option>Instagram</option>
+                            <option>YouTube</option>
+                            <option>Facebook</option>
+                        </select>
+                    </div>
+
+                    <div class="full">
+                        <label>Post / Video URL</label>
+                        <input id="postUrl" placeholder="https://instagram.com/...">
+                    </div>
+
+                </div>
+
+
+                <h2 class="milestone-heading">
+                    ✅ Payment Milestones
+                </h2>
+
+                <div class="milestone-input">
+
+                    <input id="m1name" value="Publish agreed content">
+
+                    <input id="m1percent" type="number" value="40">
+
+                </div>
+
+                <div class="milestone-input">
+
+                    <input id="m2name" value="Keep content live">
+
+                    <input id="m2percent" type="number" value="30">
+
+                </div>
+
+                <div class="milestone-input">
+
+                    <input id="m3name" value="Meet performance requirement">
+
+                    <input id="m3percent" type="number" value="30">
+
+                </div>
+
+                <div class="percentage-total">
+                    Total: <b id="percentageTotal">100%</b>
+                </div>
+
+                <button class="main-button" onclick="createContract()">
+                    Create Contract →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTRACTS -->
+        <section id="contracts" class="page hidden">
+
+            <div class="page-heading">
+                <small>ESCROWCREATOR WORKSPACE</small>
+                <h1>Contracts</h1>
+                <p>View all sponsorship agreements.</p>
+            </div>
+
+            <div id="contractList"></div>
+
+        </section>
+
+
+        <!-- PAYOUTS -->
+        <section id="payouts" class="page hidden">
+
+            <div class="page-heading">
+                <small>ESCROWCREATOR WORKSPACE</small>
+                <h1>Payout Ledger</h1>
+                <p>Record of milestone-based payment releases.</p>
+            </div>
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Contract</th>
+                            <th>Milestone</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="payoutTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
